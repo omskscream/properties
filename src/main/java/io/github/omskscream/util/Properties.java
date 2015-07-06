@@ -58,7 +58,11 @@ public class Properties implements Serializable, Cloneable {
     }
 
     public Set<String> propertyNames() {
-        return new HashSet<>(map.keySet());
+        Set<String> result = new HashSet<>(map.keySet());
+        if (defaults != null) {
+            result.addAll(defaults.map.keySet());
+        }
+        return result;
     }
 
     public void list(PrintStream out) {
